@@ -9,7 +9,7 @@ export const education = [
     degree: 'B.Sc in Computer Science & Engineering',
     school: 'BUBT',
     period: '2024',
-    note: 'CGPA 3.28 / 4.00',
+    note: 'Thesis: Context Dependent Weather Changing Prediction Using Deep Learning',
   },
 ]
 
