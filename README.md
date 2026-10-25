@@ -69,7 +69,16 @@ Every push to `main` redeploys automatically.
 | `CONTACT_TO_EMAIL` | `abdullahabir888@gmail.com` |
 | `CONTACT_FROM_EMAIL` | `Portfolio <onboarding@resend.dev>` |
 
-4. **Redeploy** (Deployments → ⋯ → Redeploy) so the variables load.
+4. Optional extras:
+
+| Name | Value |
+|---|---|
+| `SITE_URL` | your live site, e.g. `https://abir-portfolio.vercel.app` |
+| `CONTACT_AUTOREPLY` | `true` to send visitors a thank-you email (needs a verified domain) |
+
+5. **Redeploy** (Deployments → ⋯ → Redeploy) so the variables load.
+
+Email templates live in `api/_templates.js`. Your hours and the auto-reply wording (job / project / meeting / general, picked from the visitor's subject) live in `api/_availability.js`.
 
 Notes:
 - With `onboarding@resend.dev` as the sender, Resend only delivers to the email you signed up with. Sign up using the same address as `CONTACT_TO_EMAIL`. For any sender address, verify your own domain in Resend.

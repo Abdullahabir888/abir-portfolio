@@ -2,10 +2,19 @@
 // Sends the contact form to your inbox via Resend (https://resend.com).
 // Keys live in Vercel env vars only. Nothing secret reaches the browser.
 
+import { autoReplyTemplate, autoReplyText, notifyTemplate } from './_templates.js'
+import { availability, pickRule } from './_availability.js'
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
-const escape = (s = '') =>
-  String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
+async function sendEmail(apiKey, payload) {
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`)
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -21,44 +30,63 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Invalid JSON' })
     }
   }
-  const { name = '', email = '', subject = '', message = '', company = '' } = body || {}
+  const raw = body || {}
 
   // Honeypot: pretend success for bots
-  if (company) return res.status(200).json({ ok: true })
+  if (raw.company) return res.status(200).json({ ok: true })
 
-  if (String(name).trim().length < 2 || !EMAIL_RE.test(String(email).trim()) || String(subject).trim().length < 3 || String(message).trim().length < 10) {
+  const name = String(raw.name || '').trim()
+  const email = String(raw.email || '').trim()
+  const subject = String(raw.subject || '').trim()
+  const message = String(raw.message || '').trim()
+
+  if (name.length < 2 || !EMAIL_RE.test(email) || subject.length < 3 || message.length < 10) {
     return res.status(400).json({ ok: false, error: 'Please fill in all fields correctly' })
   }
-  if (String(message).length > 5000 || String(subject).length > 200 || String(name).length > 100) {
+  if (message.length > 5000 || subject.length > 200 || name.length > 100) {
     return res.status(400).json({ ok: false, error: 'Input too long' })
   }
 
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = process.env
+  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, CONTACT_AUTOREPLY, SITE_URL } = process.env
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL) {
     return res.status(500).json({ ok: false, error: 'Email service not configured' })
   }
 
+  const from = CONTACT_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>'
+  const site = SITE_URL || `https://${req.headers['x-forwarded-host'] || req.headers.host || 'abir-portfolio.vercel.app'}`
+
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: CONTACT_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
-        to: [CONTACT_TO_EMAIL],
-        reply_to: String(email).trim(),
-        subject: `[Portfolio] ${String(subject).trim()}`,
-        text: `From: ${name} <${email}>\n\n${message}`,
-        html: `<p><strong>From:</strong> ${escape(name)} &lt;${escape(email)}&gt;</p><p><strong>Subject:</strong> ${escape(subject)}</p><hr/><p style="white-space:pre-wrap">${escape(message)}</p>`,
-      }),
+    // 1. Message to you
+    await sendEmail(RESEND_API_KEY, {
+      from,
+      to: [CONTACT_TO_EMAIL],
+      reply_to: email,
+      subject: `${subject}`, // the visitor's own subject
+      text: `New message from your portfolio\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}\n\nReply to this email to answer ${name}.`,
+      html: notifyTemplate({ name, email, subject, message, site }),
     })
-    if (!r.ok) {
-      const detail = await r.text()
-      console.error('Resend error', r.status, detail)
-      return res.status(502).json({ ok: false, error: 'Email service error' })
-    }
-    return res.status(200).json({ ok: true })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ ok: false, error: 'Unexpected server error' })
+    return res.status(502).json({ ok: false, error: 'Email service error' })
   }
+
+  // 2. Optional thank-you to the sender. Needs a verified domain in Resend.
+  //    Never fails the request: your copy already arrived.
+  if (CONTACT_AUTOREPLY === 'true') {
+    const rule = pickRule(subject, message) // job / project / meeting / general
+    try {
+      await sendEmail(RESEND_API_KEY, {
+        from,
+        to: [email],
+        reply_to: CONTACT_TO_EMAIL,
+        subject: `Re: ${subject}`,
+        text: autoReplyText({ name, subject, message, site, rule, availability }),
+        html: autoReplyTemplate({ name, subject, message, site, rule, availability, linkedin: 'https://www.linkedin.com/in/abdullah-al-ahad-abir/' }),
+      })
+    } catch (err) {
+      console.error('Auto-reply failed', err)
+    }
+  }
+
+  return res.status(200).json({ ok: true })
 }
