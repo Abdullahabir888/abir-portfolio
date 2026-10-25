@@ -1,4 +1,4 @@
-import { Shirt, FlaskConical, CalendarCheck, ClipboardList, Bus, BedDouble, Library, Wallet, CodeXml } from 'lucide-react'
+import { Shirt, FlaskConical, CalendarCheck, ClipboardList, Bus, BedDouble, Library, Wallet, CodeXml, Smartphone } from 'lucide-react'
 
 export const projectFilters = [
   { id: 'all', label: 'All' },
@@ -160,23 +160,47 @@ export const projects = [
     live: '',
   },
   {
-    id: 'air-wallet',
-    title: 'Air Wallet',
-    tagline: 'Web wallet with currency exchange and secure accounts',
-    categories: ['web'],
-    icon: Wallet,
+    id: 'air-wallet-app',
+    title: 'Air Wallet — Mobile App',
+    tagline: 'Digital wallet app for Bangladesh: send, pay, recharge, exchange',
+    categories: ['mobile', 'qa'],
+    icon: Smartphone,
     accent: ['#0EA5E9', '#8B5CF6'],
-    description: 'A web wallet: sign up, verify with OTP, manage your wallet and exchange between currencies like BTC, ETH and EUR.',
+    description:
+      'A mobile wallet built for Bangladesh. Send and request money, cash out, pay bills, recharge any operator and exchange BDT with USD, GBP and EUR.',
     details: [
-      'Sign up, login, OTP verification and password reset.',
-      'Wallet and currency exchange pages.',
-      'Admin login and user management.',
-      'PHP, MySQL, JavaScript and Composer packages.',
+      'Sign up, sign in, email verification and password reset, with social login.',
+      'Send, request, cash out, pay bills and mobile recharge (Grameenphone, Robi, Banglalink, Airtel, Teletalk).',
+      'Multi-currency exchange: BDT, USD, GBP, EUR.',
+      'Firebase Auth, Firestore and Cloud Functions with locked-down security rules.',
+      'Unit tests for core logic, validation and the app, plus Firestore rules tests, run in GitHub Actions CI.',
     ],
-    role: 'Developer.',
-    tech: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
+    role: 'Built and tested the full app.',
+    tech: ['React Native', 'Expo', 'TypeScript', 'Firebase', 'Jest', 'GitHub Actions'],
     image: '',
-    github: `${GH}/air-wallet`,
+    github: `${GH}/air-wallet-app`,
+    live: '',
+  },
+  {
+    id: 'air-wallet-web',
+    title: 'Air Wallet — Web & Admin',
+    tagline: 'Web version of the wallet with an admin panel',
+    categories: ['web', 'qa'],
+    icon: Wallet,
+    accent: ['#8B5CF6', '#EC4899'],
+    description:
+      'The web edition of Air Wallet, installable as a web app, plus an admin panel to manage users and watch transactions.',
+    details: [
+      'All wallet features in the browser, installable as a PWA.',
+      'Admin panel: user list and profiles, transaction monitoring and an audit log.',
+      'Firebase App Check and secure auth handling.',
+      'Shared core and validation packages with the mobile app.',
+      'Automated tests and CI on every push.',
+    ],
+    role: 'Built and tested the web app and admin panel.',
+    tech: ['React Native Web', 'Expo', 'TypeScript', 'Firebase', 'Jest', 'GitHub Actions'],
+    image: '',
+    github: `${GH}/air-wallet-web`,
     live: '',
   },
   {

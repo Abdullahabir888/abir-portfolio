@@ -35,7 +35,7 @@ export const experience = [
       'Automated regression tests with Selenium and TestNG.',
       'Ran functional, integration and performance tests against business requirements.',
     ],
-    achievements: ['Automation cut manual testing time and sped up releases'],
+    achievements: ['Automation cut manual testing time and made releases faster.'],
     tools: ['Selenium', 'TestNG', 'Java'],
   },
   {
