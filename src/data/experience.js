@@ -3,15 +3,14 @@ export const experience = [
   {
     title: 'SQA Officer',
     company: 'Response Limited',
-    note: 'Augmented at Banglalink · Telecom',
+    note: 'Deployed at Banglalink · Telecom',
     period: 'Jan 2025 – Present',
     current: true,
     responsibilities: [
-      'QA Project Lead for Hope and D2D: own the test plans, coordinate with developers and product, report status and open defects.',
-      'Write test plans and test cases from functional specs.',
-      'Run functional, regression and integration cycles across mobile and web.',
-      'Manual testing on the MyBL and Ryze apps.',
-      'Log defects in Jira and work with developers until every fix is verified.',
+      'QA Project Lead for Hope and D2D: own the test plans, coordinate testing with developers and product, and report test status and open defects.',
+      'Review functional specs and requirements, then write test scenarios and test cases before each cycle.',
+      'Run functional, regression and integration testing on web and mobile, including the MyBL and Ryze apps.',
+      'Log, document and track defects in Jira, and verify each fix with developers before release.',
     ],
     achievements: ['Led D2D QA through to a successful launch', 'Tested Techvan and Mukto Pay until both went live'],
     tools: ['Jira', 'Postman', 'Test Plans', 'Regression', 'UAT'],
@@ -21,7 +20,7 @@ export const experience = [
     company: 'Coderslive.net',
     period: 'Jul 2024 – Jan 2025',
     responsibilities: [
-      'Tested several web and mobile products, catching functional bugs and usability problems before release.',
+      'Tested web and mobile products against requirements, catching functional bugs and usability problems before release.',
       'Wrote and ran functional, regression, integration and performance test cases.',
     ],
     achievements: [],
@@ -32,8 +31,8 @@ export const experience = [
     company: 'M360 ICT',
     period: 'Apr 2024 – Jul 2024',
     responsibilities: [
-      'Automated regression tests with Selenium and TestNG.',
       'Ran functional, integration and performance tests against business requirements.',
+      'Project: Trabill.',
     ],
     achievements: ['Automation cut manual testing time and made releases faster.'],
     tools: ['Selenium', 'TestNG', 'Java'],
@@ -45,6 +44,7 @@ export const experience = [
     responsibilities: [
       'Tested web apps manually and reported bugs, usability issues and functional defects in Jira.',
       'Wrote test cases and followed up with developers until defects were fixed.',
+      'Projects: DigitalRx, DigitalPharmacy.',
     ],
     achievements: [],
     tools: ['Manual Testing', 'Jira', 'Test Cases'],

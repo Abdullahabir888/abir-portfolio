@@ -39,8 +39,8 @@ export default function Products() {
                 aria-label={`${p.name} — ${p.text} (opens in new tab)`}
               >
                 {p.logo ? (
-                  <span className={`grid h-14 w-20 shrink-0 place-items-center overflow-hidden rounded-xl p-1.5 shadow-lg ring-1 ${p.logoBg === 'dark' ? 'bg-black ring-white/10' : 'bg-white ring-black/5'}`}>
-                    <img src={p.logo} alt={`${p.name} logo`} loading="lazy" className="h-full w-full object-contain" />
+                  <span className={`flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl p-1.5 shadow-lg ring-1 ${p.logoBg === 'dark' ? 'bg-black ring-white/10' : 'bg-white ring-black/5'}`}>
+                    <img src={p.logo} alt={`${p.name} logo`} loading="lazy" className="block h-full w-full object-contain" />
                   </span>
                 ) : (
                   <span

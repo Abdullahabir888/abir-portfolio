@@ -35,8 +35,8 @@ export const profile = {
 
 export const about = {
   summary: [
-    'Quality is my main job. I read the spec, find the gaps, write the tests and chase every bug until the fix is verified.',
-    "Right now I'm at Banglalink, leading QA for the Hope and D2D projects. I was part of the team that took D2D, Techvan and Mukto Pay live.",
+    'Quality is my main job. I review requirements, turn them into test scenarios and test cases, and track every defect in Jira until the fix is verified.',
+    "Now I'm QA Project Lead at Banglalink for the Hope and D2D projects, working closely with developers and project teams so each release matches its specs before it ships.",
     'I also build. React, Flutter and SQL help me see an app the way developers do — so my bug reports are clear, specific and easy to act on.',
   ],
   highlights: [

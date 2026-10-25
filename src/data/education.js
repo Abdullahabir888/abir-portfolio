@@ -1,6 +1,6 @@
 export const education = [
   {
-    degree: 'Professional Masters in Computer Science (PMSCS)',
+    degree: "Professional Master's in Computer Science (PMSCS)",
     school: 'Jahangirnagar University',
     period: '2025 – Present',
     note: 'Thesis: AI-driven body measurement and virtual try-on (MODIQUE)',
@@ -31,7 +31,7 @@ export const extras = [
   },
   {
     label: 'Leadership',
-    text: 'General Secretary, IEEE BUBT Computer Society Student Branch Chapter',
+    text: 'General Secretary, IEEE BUBT Computer Society Student Branch Chapter. Organized tech events and student activities.',
   },
   { label: 'Languages', text: 'Bengali (native), English (professional)' },
 ]
