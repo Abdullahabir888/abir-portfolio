@@ -1,0 +1,59 @@
+import { ShieldCheck, FlaskConical, CodeXml, Braces, Database } from 'lucide-react'
+
+// `depth` describes how you use the category — honest, no fake percentages.
+export const skillCategories = [
+  {
+    id: 'qa',
+    label: 'Quality Assurance',
+    icon: ShieldCheck,
+    depth: 'Core expertise',
+    blurb: 'What I do every day.',
+    skills: [
+      'Manual Testing',
+      'Automation Testing',
+      'Functional Testing',
+      'Regression Testing',
+      'Integration Testing',
+      'Mobile App Testing',
+      'Web App Testing',
+      'UAT',
+      'Test Case Design',
+      'Defect Management',
+      'SDLC',
+      'STLC',
+      'Agile',
+    ],
+  },
+  {
+    id: 'automation',
+    label: 'Automation & API',
+    icon: FlaskConical,
+    depth: 'Regular use',
+    blurb: 'Faster regression, repeatable checks.',
+    skills: ['Selenium WebDriver', 'Appium', 'Cucumber', 'TestNG', 'Postman', 'REST API Testing', 'Automated Test Execution'],
+  },
+  {
+    id: 'development',
+    label: 'Development',
+    icon: CodeXml,
+    depth: 'Hands-on',
+    blurb: 'Enough to build, debug and talk to devs.',
+    skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Flutter', 'Dart'],
+  },
+  {
+    id: 'programming',
+    label: 'Programming',
+    icon: Braces,
+    depth: 'Academic & project use',
+    blurb: 'Foundations from university and projects.',
+    skills: ['C', 'C++', 'Java', 'C#'],
+  },
+  {
+    id: 'data-tools',
+    label: 'Database & Tools',
+    icon: Database,
+    depth: 'Daily use',
+    blurb: 'Data, defects, code and environments.',
+    skills: ['MySQL', 'SQL', 'Jira', 'Git', 'GitHub', 'Docker', 'VS Code', 'IntelliJ IDEA', 'Android Studio'],
+  },
+]

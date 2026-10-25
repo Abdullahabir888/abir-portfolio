@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens (RGB triplets so Tailwind opacity modifiers work) */
+:root {
+  --bg: 246 247 251;
+  --surface: 255 255 255;
+  --raised: 238 240 248;
+  --line: 222 225 238;
+  --ink: 15 18 36;
+  --muted: 88 94 120;
+  --blue: 37 99 235;
+  --violet: 124 58 237;
+  --pass: 22 163 74;
+  --fail: 220 38 38;
+}
+.dark {
+  --bg: 11 13 26;
+  --surface: 18 21 38;
+  --raised: 26 30 52;
+  --line: 40 45 72;
+  --ink: 236 238 248;
+  --muted: 150 156 186;
+  --blue: 59 130 246;
+  --violet: 139 92 246;
+  --pass: 74 222 128;
+  --fail: 248 113 113;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  ::selection { background: rgb(var(--violet) / 0.35); }
+  :focus-visible { outline: 2px solid rgb(var(--blue)); outline-offset: 3px; border-radius: 6px; }
+  section { scroll-margin-top: 80px; }
+}
+
+@layer components {
+  .container-site { @apply mx-auto w-full max-w-site px-5 sm:px-8; }
+  .glass {
+    @apply border border-line/70 bg-surface/70 backdrop-blur-xl;
+  }
+  .grad-text {
+    background: linear-gradient(100deg, rgb(var(--blue)), rgb(var(--violet)));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply btn text-white;
+    background: linear-gradient(100deg, rgb(var(--blue)), rgb(var(--violet)));
+    box-shadow: 0 10px 30px -10px rgb(var(--violet) / 0.6);
+  }
+  .btn-ghost { @apply btn border border-line bg-surface/60 text-ink hover:border-blue/60 hover:bg-raised; }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line bg-raised/60 px-3 py-1 text-xs font-medium text-muted;
+  }
+  .label-mono { @apply font-mono text-xs uppercase tracking-[0.18em] text-blue; }
+  .field {
+    @apply w-full rounded-xl border border-line bg-bg/60 px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-blue focus:outline-none;
+  }
+}
+
+/* Subtle grid backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(var(--line) / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--line) / 0.45) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
