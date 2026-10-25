@@ -12,7 +12,7 @@ export default function Footer() {
             <Logo size={28} />
           </a>
         <p>
-          © {new Date().getFullYear()} {profile.name}.
+          © {new Date().getFullYear()} {profile.name}. Tested before shipped.
         </p>
         </div>
         <ul className="flex flex-wrap justify-center gap-4">
